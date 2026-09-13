@@ -1,0 +1,4 @@
+/home/sworto/Documents/blackjack/build/CMakeFiles/gamelogic.dir
+/home/sworto/Documents/blackjack/build/CMakeFiles/engine.dir
+/home/sworto/Documents/blackjack/build/CMakeFiles/edit_cache.dir
+/home/sworto/Documents/blackjack/build/CMakeFiles/rebuild_cache.dir

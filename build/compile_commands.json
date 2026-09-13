@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/sworto/Documents/blackjack/build",
+  "command": "/usr/bin/c++  -I/home/sworto/Documents/blackjack/include -std=gnu++17 -o CMakeFiles/gamelogic.dir/libs/logic.cpp.o -c /home/sworto/Documents/blackjack/libs/logic.cpp",
+  "file": "/home/sworto/Documents/blackjack/libs/logic.cpp",
+  "output": "CMakeFiles/gamelogic.dir/libs/logic.cpp.o"
+},
+{
+  "directory": "/home/sworto/Documents/blackjack/build",
+  "command": "/usr/bin/c++  -I/home/sworto/Documents/blackjack/include -std=gnu++17 -o CMakeFiles/engine.dir/src/main.cpp.o -c /home/sworto/Documents/blackjack/src/main.cpp",
+  "file": "/home/sworto/Documents/blackjack/src/main.cpp",
+  "output": "CMakeFiles/engine.dir/src/main.cpp.o"
+}
+]
