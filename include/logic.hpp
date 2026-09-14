@@ -8,3 +8,4 @@ struct card{
 };
 struct card generatelog();
 std::string cardvalue(struct card);
+int handvalue(std::vector<struct card>);

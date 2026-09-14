@@ -1,4 +1,27 @@
 #include "logic.hpp"
+
+int handvalue(std::vector<struct card> hand){
+    int aces = 0;
+    int value = 0;
+    for(auto a: hand){
+        if(a.weight == 1){
+            aces++;
+            value+=11;
+        }
+        if(a.weight == 11 || a.weight == 12 || a.weight == 13){
+            value+=10;
+        }
+        else{
+            value+=a.weight;
+        }
+    }
+    while(value>21&&aces>0){
+        value-=10;
+        aces--;
+    }
+    return value;
+}
+
 struct card generatelog(){
     struct card c;
     std::random_device rd;
