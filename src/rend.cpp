@@ -49,9 +49,11 @@ int main()
             }
         }
 
+        //Render Area
         paintbuffer(framebuffer,0x000000);
-        putTextureAt(framebuffer,t1,0+i,0+i);
+        putTextureAt(framebuffer,t1,0+i,0);
         i++;
+
         SDL_UpdateTexture(texture,NULL,framebuffer,WIDTH*sizeof(uint32_t));
 
         //RendererClearing

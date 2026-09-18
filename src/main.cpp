@@ -2,6 +2,7 @@
 int main(){
     std::vector<struct card> dealer;
     std::vector<struct card> player;
+
     //Dealer Move1:
     std::cout << "Dealer Deals himself: ";
     dealer.push_back(generatelog());
@@ -9,9 +10,13 @@ int main(){
 
     //Player Move1:
     std::cout << "Dealer Deals player: ";
+
     player.push_back(generatelog());
+
     std::cout<< cardvalue(player.back());
+
     player.push_back(generatelog());
+    
     std::cout<< " and " <<cardvalue(player.back()) << std::endl;
     std::cout << "Dealer: " << handvalue(dealer) << " Player: " << handvalue(player) << std::endl;
 

@@ -1,8 +1,10 @@
 #include "logic.hpp"
 
 int handvalue(std::vector<struct card> hand){
+
     int aces = 0;
     int value = 0;
+
     for(auto a: hand){
         if(a.weight == 1){
             aces++;
@@ -15,10 +17,12 @@ int handvalue(std::vector<struct card> hand){
             value+=a.weight;
         }
     }
+
     while(value>21&&aces>0){
         value-=10;
         aces--;
     }
+
     return value;
 }
 
@@ -26,10 +30,13 @@ struct card generatelog(){
     struct card c;
     std::random_device rd;
     std::mt19937 gen(rd());
+    
+
+    //Class: <Spade: 1, Club: 2, Diamond 3, Heart 4>
     std::uniform_int_distribution<int> dist(1,4);
-    //Class <Spade: 1, Club: 2, Diamond 3, Heart 4>
     c.type = dist(gen);
-    //Name: 
+
+    //Weight: 1..13
     dist = std::uniform_int_distribution<int>(1,13);
     c.weight = dist(gen);
     return c;
