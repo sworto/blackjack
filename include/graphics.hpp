@@ -8,3 +8,5 @@
 uint32_t putPixelAt(int x, int y);
 
 void putTextureAt(uint32_t* framebuffer, struct texture, int x, int y);
+
+void paintbuffer(uint32_t* framebuffer,uint32_t color);

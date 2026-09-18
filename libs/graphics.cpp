@@ -2,23 +2,29 @@
 #include "textureloader.hpp"
 
 uint32_t putPixelAt(int x, int y){
-    uint32_t zerX = WIDTH/2;
-    uint32_t zerY = HEIGHT/2;
+    x+=WIDTH/2;
+    y+=HEIGHT/2;
 
-    x%=WIDTH/2;
-    y%=HEIGHT/2;
+    x%=WIDTH;
+    y%=HEIGHT;
 
-    x+=zerX;
-    y+=zerY;
+    y=HEIGHT-y-1;
 
-    return (HEIGHT-1-y)*WIDTH+x;
+    return x+y*WIDTH;
+}
+/*Paint Render Logic
+
+*/
+void paintbuffer(uint32_t* framebuffer,uint32_t color){
+    std::fill(framebuffer,framebuffer+WIDTH*HEIGHT,color);
+    return;
 }
 
 
 void putTextureAt(uint32_t* framebuffer,struct texture Tex, int x, int y){
     for(int i=0;i<Tex.height;i++){
         for(int j=0;j<Tex.width;j++){
-            framebuffer[putPixelAt(x+i,y+j)] = Tex.buffer[i+j*Tex.width];
+            framebuffer[putPixelAt(x+i-Tex.height/2,y+j-Tex.width/2)] = Tex.buffer[i+j*Tex.width];
         }
     }
     return;

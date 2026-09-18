@@ -31,15 +31,13 @@ int main()
 
 
     //FramebufferResetToBlack
-    std::fill(std::begin(framebuffer),std::end(framebuffer),0x000000);
-    
+    paintbuffer(framebuffer,0x000000);
 
     bool running = true;
     int i =0;
     struct texture t1 = readbmp("textures/sampletex3.bmp");
 
     //Sample Texture Putting
-    putTextureAt(framebuffer,t1,0,0);
     while (running)
     {
         SDL_Event event;
@@ -51,13 +49,9 @@ int main()
             }
         }
 
-        /*framebuffer[putPixelAt(0,i)]=0x00AA00AA;
-        framebuffer[putPixelAt(0,-i)]=0x00AA00AA;
+        paintbuffer(framebuffer,0x000000);
+        putTextureAt(framebuffer,t1,0+i,0+i);
         i++;
-        BULLSHIT here and there
-        std::fill(std::begin(framebuffer),std::end(framebuffer),t1.buffer[i%t1.buffer.size()]);
-        i++;*/
-
         SDL_UpdateTexture(texture,NULL,framebuffer,WIDTH*sizeof(uint32_t));
 
         //RendererClearing
