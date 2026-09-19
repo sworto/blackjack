@@ -66,9 +66,7 @@ int main()
     //FramebufferBackgroundSetup
     paintbuffer(framebuffer,0xFFFFFF);
     putTextureAt(framebuffer,texturelist[0],0,0);
-    card c1 = generatelog();
-    card c2 = generatelog();
-    ShowCardList(framebuffer,crds,texturelist,PLAYERORIGIN_X,PLAYERORIGIN_Y);
+    
     bool running = true;
     while (running)
     {
@@ -82,7 +80,7 @@ int main()
         }
 
         //Render Area
-
+        ShowCardList(framebuffer,crds,texturelist,PLAYERORIGIN_X,PLAYERORIGIN_Y);
 
         SDL_UpdateTexture(texture,NULL,framebuffer,WIDTH*sizeof(uint32_t));
 
