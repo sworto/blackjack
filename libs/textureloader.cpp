@@ -23,18 +23,16 @@ struct texture readbmp(std::string img){
     file.read(reinterpret_cast<char*>(&info),sizeof(info));
     std::cout << "Size: " << (int)info.size << std::endl;
     std::cout << "Width: " << (int) info.width << std::endl;
-    std::cout << "Height: " << (int) info.height << std::endl;
+    std::cout << "Height: " << (int) info.height << std::endl << std::endl;
 
     texture t1;
     uint32_t val;
     t1.height=info.height;
     t1.width = info.width;
-
     file.seekg(header.pixelOffset,std::ios::beg);
     while(file.read(reinterpret_cast<char*>(&val),sizeof(val))){
         t1.buffer.push_back(val);
     }
-
     /*for(int i=0;i<t1.height;i++){
         for(int j=0;j<t1.width;j++){
             std::cout << std::hex << t1.buffer[i * t1.width + j] << " ";

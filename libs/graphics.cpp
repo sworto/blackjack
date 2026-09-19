@@ -5,8 +5,8 @@ uint32_t putPixelAt(int x, int y){
     x+=WIDTH/2;
     y+=HEIGHT/2;
 
-    x%=WIDTH;
-    y%=HEIGHT;
+    x=((x % WIDTH) + WIDTH) % WIDTH;
+    y=((y % HEIGHT) + HEIGHT) % HEIGHT;
 
     y=HEIGHT-y-1;
 
@@ -24,7 +24,7 @@ void putTextureAt(uint32_t* framebuffer,struct texture Tex, int x, int y){
 
     for(int i=0;i<Tex.height;i++){
         for(int j=0;j<Tex.width;j++){
-            framebuffer[putPixelAt(x+i-Tex.height/2,y+j-Tex.width/2)] = Tex.buffer[i+j*Tex.width];
+            framebuffer[putPixelAt(x+j-Tex.width/2,y+i-Tex.height/2)] = Tex.buffer[i*Tex.width+j];
         }
     }
     

@@ -2,8 +2,10 @@
 #include <iostream>
 #include <algorithm>
 
-#define WIDTH 1920
-#define HEIGHT 1080
+#define WIDTH 256
+#define HEIGHT 144
+#define PLAYERORIGIN_X 0
+#define PLAYERORIGIN_Y HEIGHT-20
 
 uint32_t putPixelAt(int x, int y);
 

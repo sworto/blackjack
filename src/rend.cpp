@@ -2,6 +2,10 @@
 #include "textureloader.hpp"
 int main()
 {
+    //Texture Loading
+    struct texture t1 = readbmp("textures/sampletex2.bmp");
+    struct texture background = readbmp("textures/background.bmp");
+    struct texture playingcard  = readbmp("textures/playingcard.bmp");
     //SDL initialisation
     if (!SDL_Init(SDL_INIT_VIDEO))
     {
@@ -20,6 +24,7 @@ int main()
         return 1;
     }
 
+    
     //Renderer Creation
     SDL_Renderer* renderer = SDL_CreateRenderer(window,nullptr);
     
@@ -27,15 +32,15 @@ int main()
     //Texture and Framebuffer Creation
     uint32_t framebuffer[WIDTH*HEIGHT];
     SDL_Texture* texture = SDL_CreateTexture(renderer,SDL_PIXELFORMAT_XRGB8888,SDL_TEXTUREACCESS_STREAMING,WIDTH,HEIGHT);
-
+    //Texture Scaling
+    SDL_SetTextureScaleMode(texture,SDL_SCALEMODE_NEAREST);
 
 
     //FramebufferResetToBlack
-    paintbuffer(framebuffer,0x000000);
-
+    paintbuffer(framebuffer,0xFFFFFF);
+    putTextureAt(framebuffer,background,0,0);
+    putTextureAt(framebuffer,playingcard,PLAYERORIGIN_X,PLAYERORIGIN_Y);
     bool running = true;
-    int i =0;
-    struct texture t1 = readbmp("textures/sampletex3.bmp");
 
     //Sample Texture Putting
     while (running)
@@ -50,10 +55,7 @@ int main()
         }
 
         //Render Area
-        paintbuffer(framebuffer,0x000000);
-        putTextureAt(framebuffer,t1,0+i,0);
-        i++;
-
+        
         SDL_UpdateTexture(texture,NULL,framebuffer,WIDTH*sizeof(uint32_t));
 
         //RendererClearing
