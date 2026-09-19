@@ -1,11 +1,38 @@
 #include "graphics.hpp"
 #include "textureloader.hpp"
+#include "logic.hpp"
+void ShowCardList(uint32_t* framebuffer,std::vector<card> &cards,std::vector<texture> &texturelist,int  x, int y){
+    int increment = texturelist[1].width/2;
+    int totalcount = cards.size();
+    int start = x-totalcount/2*increment;
+    for(int i=0;i<totalcount;i++){
+        putTextureAt(framebuffer,texturelist[cards[i].weight],start+i*increment,y);
+    }
+    return;
+}
 int main()
 {
     //Texture Loading
-    struct texture t1 = readbmp("textures/sampletex2.bmp");
-    struct texture background = readbmp("textures/background.bmp");
-    struct texture playingcard  = readbmp("textures/playingcard.bmp");
+    std::vector<texture> texturelist;
+    texturelist.push_back(readbmp("textures/background.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playing-card-1.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playing-card-2.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playing-card-3.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playing-card-4.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playing-card-5.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playing-card-6.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playing-card-7.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playing-card-8.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playing-card-9.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playing-card-10.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playingcard.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playingcard.bmp"));
+    texturelist.push_back(readbmp("textures/cards/playingcard.bmp"));
+
+    std::vector<card> crds;
+    for(int i=0;i<3;i++){
+        crds.push_back(generatelog());
+    }
     //SDL initialisation
     if (!SDL_Init(SDL_INIT_VIDEO))
     {
@@ -36,13 +63,13 @@ int main()
     SDL_SetTextureScaleMode(texture,SDL_SCALEMODE_NEAREST);
 
 
-    //FramebufferResetToBlack
+    //FramebufferBackgroundSetup
     paintbuffer(framebuffer,0xFFFFFF);
-    putTextureAt(framebuffer,background,0,0);
-    putTextureAt(framebuffer,playingcard,PLAYERORIGIN_X,PLAYERORIGIN_Y);
+    putTextureAt(framebuffer,texturelist[0],0,0);
+    card c1 = generatelog();
+    card c2 = generatelog();
+    ShowCardList(framebuffer,crds,texturelist,PLAYERORIGIN_X,PLAYERORIGIN_Y);
     bool running = true;
-
-    //Sample Texture Putting
     while (running)
     {
         SDL_Event event;
@@ -55,7 +82,8 @@ int main()
         }
 
         //Render Area
-        
+
+
         SDL_UpdateTexture(texture,NULL,framebuffer,WIDTH*sizeof(uint32_t));
 
         //RendererClearing

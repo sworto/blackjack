@@ -1,5 +1,4 @@
 #include "logic.hpp"
-
 int handvalue(std::vector<struct card> hand){
 
     int aces = 0;

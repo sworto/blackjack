@@ -49,5 +49,6 @@ target_link_libraries(rend
     PRIVATE
         renderer
         textureloader
+        gamelogic
         SDL3::SDL3
 )

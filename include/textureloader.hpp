@@ -29,3 +29,4 @@ struct DIBInfoHeader{
 #pragma pack(pop)
 
 struct texture readbmp(std::string img);
+

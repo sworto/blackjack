@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <random>
-
 struct card{
     int type;
     int weight;
