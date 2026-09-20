@@ -31,7 +31,6 @@ int main(){
             std::cout << "Dealer deals player: " << cardvalue(player.back()) << std::endl;
             std::cout << "Player: " << handvalue(player) << std::endl;
         }
-
         if(handvalue(player)>21){
             std::cout << "Player Loses!!" << std::endl;
             return 0;

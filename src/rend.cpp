@@ -28,11 +28,8 @@ int main()
     texturelist.push_back(readbmp("textures/cards/playingcard.bmp"));
     texturelist.push_back(readbmp("textures/cards/playingcard.bmp"));
     texturelist.push_back(readbmp("textures/cards/playingcard.bmp"));
+    texturelist.push_back(readbmp("textures/buttons/gameoptions.bmp"));
 
-    std::vector<card> crds;
-    for(int i=0;i<3;i++){
-        crds.push_back(generatelog());
-    }
     //SDL initialisation
     if (!SDL_Init(SDL_INIT_VIDEO))
     {
@@ -50,11 +47,9 @@ int main()
         SDL_Quit();
         return 1;
     }
-
-    
+ 
     //Renderer Creation
     SDL_Renderer* renderer = SDL_CreateRenderer(window,nullptr);
-    
 
     //Texture and Framebuffer Creation
     uint32_t framebuffer[WIDTH*HEIGHT];
@@ -62,14 +57,23 @@ int main()
     //Texture Scaling
     SDL_SetTextureScaleMode(texture,SDL_SCALEMODE_NEAREST);
 
-
     //FramebufferBackgroundSetup
     paintbuffer(framebuffer,0xFFFFFF);
     putTextureAt(framebuffer,texturelist[0],0,0);
-    
+    Button b1;
+    b1.x=0;
+    b1.y=0;
+    putTextureAt(framebuffer,texturelist[14],b1.x,b1.y);
+    //Game Logic Initialisation
+    std::vector<struct card> dealer;
+    std::vector<struct card> player;
+
+    //Player Choice: 
+    std::string choice;
     bool running = true;
-    while (running)
-    {
+
+    ShowCardList(framebuffer,dealer,texturelist,DEALERORIGIN_X,DEALERORIGIN_Y);
+    while(running&&choice!="stand"){
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
@@ -77,10 +81,19 @@ int main()
             {
                 running = false;
             }
+            if(event.type == SDL_EVENT_MOUSE_BUTTON_DOWN){
+                if(event.button.button == SDL_BUTTON_LEFT){
+                    std::cout << "Lclick" << std::endl;
+                    if(b1.mouseinside(texturelist[14],event.button.x,event.button.y)){
+                        std::cout << "X: " << event.button.x << "Y: " << event.button.y << std::endl;
+                        player.push_back(generatelog());
+                    }
+                }
+            }
         }
 
         //Render Area
-        ShowCardList(framebuffer,crds,texturelist,PLAYERORIGIN_X,PLAYERORIGIN_Y);
+        ShowCardList(framebuffer,player,texturelist,PLAYERORIGIN_X,PLAYERORIGIN_Y);
 
         SDL_UpdateTexture(texture,NULL,framebuffer,WIDTH*sizeof(uint32_t));
 
@@ -94,7 +107,6 @@ int main()
         //RendererPresentation
         SDL_RenderPresent(renderer);
     }
-
 
     //Destruction
     SDL_DestroyTexture(texture);

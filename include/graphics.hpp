@@ -5,7 +5,16 @@
 #define WIDTH 256
 #define HEIGHT 144
 #define PLAYERORIGIN_X 0
-#define PLAYERORIGIN_Y HEIGHT-20
+#define PLAYERORIGIN_Y -20
+#define DEALERORIGIN_X 0
+#define DEALERORIGIN_Y 40
+
+struct Button{
+    int x;
+    int y;
+
+    bool mouseinside(struct texture ButtTex,int mouseX, int mouseY);
+};
 
 uint32_t putPixelAt(int x, int y);
 
