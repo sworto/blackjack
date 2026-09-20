@@ -28,8 +28,8 @@ int main()
     texturelist.push_back(readbmp("textures/cards/playingcard.bmp"));
     texturelist.push_back(readbmp("textures/cards/playingcard.bmp"));
     texturelist.push_back(readbmp("textures/cards/playingcard.bmp"));
-    texturelist.push_back(readbmp("textures/buttons/gameoptions.bmp"));
-
+    texturelist.push_back(readbmp("textures/buttons/standbutton.bmp"));
+    texturelist.push_back(readbmp("textures/buttons/hitbutton.bmp"));
     //SDL initialisation
     if (!SDL_Init(SDL_INIT_VIDEO))
     {
@@ -62,10 +62,17 @@ int main()
     //FramebufferBackgroundSetup
     paintbuffer(framebuffer,0xFFFFFF);
     putTextureAt(framebuffer,texturelist[0],0,0);
-    Button b1;
-    b1.x=100;
-    b1.y=100;
-    putTextureAt(framebuffer,texturelist[14],b1.x,b1.y);
+
+    Button standButton;
+    standButton.x=-PLAYERBUTTON_X;
+    standButton.y=PLAYERBUTTON_Y;
+    putTextureAt(framebuffer,texturelist[14],standButton.x,standButton.y);
+
+    Button hitButton;
+    hitButton.x=PLAYERBUTTON_X-1;
+    hitButton.y=PLAYERBUTTON_Y;
+    putTextureAt(framebuffer,texturelist[15],hitButton.x,hitButton.y);
+
     //Game Logic Initialisation
     std::vector<struct card> dealer;
     std::vector<struct card> player;
@@ -85,10 +92,10 @@ int main()
             }
             if(event.type == SDL_EVENT_MOUSE_BUTTON_DOWN){
                 if(event.button.button == SDL_BUTTON_LEFT){
-                    std::cout << "Lclick" << std::endl;
+
                     SDL_ConvertEventToRenderCoordinates(renderer,&event);
-                    std::cout << "X: " << event.button.x << "Y: " << event.button.y << std::endl;
-                    if(b1.mouseinside(texturelist[14],event.button.x,event.button.y)){
+                    
+                    if(hitButton.mouseinside(texturelist[14],event.button.x,event.button.y)){
                         std::cout << "X: " << event.button.x << "Y: " << event.button.y << std::endl;
                         player.push_back(generatelog());
                     }

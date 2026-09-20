@@ -12,6 +12,8 @@
 #define DEALERORIGIN_X 0
 #define DEALERORIGIN_Y 40
 
+#define PLAYERBUTTON_X 62
+#define PLAYERBUTTON_Y -60
 struct Button{
     int x;
     int y;

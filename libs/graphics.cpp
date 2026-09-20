@@ -21,7 +21,6 @@ void paintbuffer(uint32_t* framebuffer,uint32_t color){
 
 
 void putTextureAt(uint32_t* framebuffer,struct texture Tex, int x, int y){
-
     for(int i=0;i<Tex.height;i++){
         for(int j=0;j<Tex.width;j++){
             if(Tex.buffer[i*Tex.width+j]!=0x000000){
@@ -33,10 +32,10 @@ void putTextureAt(uint32_t* framebuffer,struct texture Tex, int x, int y){
     return;
 }
 
-bool Button::mouseinside(struct texture ButtTex,int mouseX, int mouseY){    
+bool Button::mouseinside(struct texture ButtTex,int mouseX, int mouseY){
     mouseY = HEIGHT-mouseY-1;
     mouseX-=WIDTH/2;
     mouseY-=HEIGHT/2;
     std::cout << "COORD: " << "X:" << mouseX << " Y:" << mouseY << std::endl; 
-    return mouseX>x-ButtTex.width/2 && mouseY>y-ButtTex.height/2 && mouseX<x+ButtTex.width/2 && mouseY < y+ButtTex.height/2;
+    return mouseX>(x-ButtTex.width/2) && mouseY>(y-ButtTex.height/2) && mouseX<(x+ButtTex.width/2) && mouseY< (y+ButtTex.height/2);
 }
