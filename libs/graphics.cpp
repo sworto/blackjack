@@ -33,9 +33,10 @@ void putTextureAt(uint32_t* framebuffer,struct texture Tex, int x, int y){
     return;
 }
 
-bool Button::mouseinside(struct texture ButtTex,int mouseX, int mouseY){
-    mouseX+=WIDTH/2;
-    mouseY+=HEIGHT/2;
-    mouseY=HEIGHT-mouseY-1;
-    return mouseX>=Button::x && mouseY<=Button::y && mouseX<Button::x+ButtTex.width && mouseY > Button::y+ButtTex.height;
+bool Button::mouseinside(struct texture ButtTex,int mouseX, int mouseY){    
+    /*mouseY = HEIGHT-mouseY-1;
+    mouseX=WIDTH/2-mouseX;
+    mouseY=HEIGHT/2-mouseY;*/
+    std::cout << "COORD: " << "X:" << mouseX << " Y:" << mouseY << std::endl; 
+    return mouseX>x-ButtTex.width/2 && mouseY>y-ButtTex.height/2 && mouseX<x+ButtTex.width/2 && mouseY < y+ButtTex.height/2;
 }

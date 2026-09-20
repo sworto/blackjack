@@ -2,6 +2,9 @@
 #include <iostream>
 #include <algorithm>
 
+#define XRES 1920
+#define YRES 1080
+
 #define WIDTH 256
 #define HEIGHT 144
 #define PLAYERORIGIN_X 0

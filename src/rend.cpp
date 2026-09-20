@@ -47,9 +47,11 @@ int main()
         SDL_Quit();
         return 1;
     }
- 
+
     //Renderer Creation
     SDL_Renderer* renderer = SDL_CreateRenderer(window,nullptr);
+    SDL_SetRenderLogicalPresentation(renderer, WIDTH, HEIGHT, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    //DPI ADJUSTMENT
 
     //Texture and Framebuffer Creation
     uint32_t framebuffer[WIDTH*HEIGHT];
@@ -84,6 +86,8 @@ int main()
             if(event.type == SDL_EVENT_MOUSE_BUTTON_DOWN){
                 if(event.button.button == SDL_BUTTON_LEFT){
                     std::cout << "Lclick" << std::endl;
+                    SDL_ConvertEventToRenderCoordinates(renderer,&event);
+                    std::cout << "X: " << event.button.x << "Y: " << event.button.y << std::endl;
                     if(b1.mouseinside(texturelist[14],event.button.x,event.button.y)){
                         std::cout << "X: " << event.button.x << "Y: " << event.button.y << std::endl;
                         player.push_back(generatelog());
