@@ -63,8 +63,8 @@ int main()
     paintbuffer(framebuffer,0xFFFFFF);
     putTextureAt(framebuffer,texturelist[0],0,0);
     Button b1;
-    b1.x=0;
-    b1.y=0;
+    b1.x=100;
+    b1.y=100;
     putTextureAt(framebuffer,texturelist[14],b1.x,b1.y);
     //Game Logic Initialisation
     std::vector<struct card> dealer;
