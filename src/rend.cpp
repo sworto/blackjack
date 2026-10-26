@@ -1,6 +1,7 @@
 #include "graphics.hpp"
 #include "textureloader.hpp"
 #include "logic.hpp"
+
 void ShowCardList(uint32_t* framebuffer,std::vector<card> &cards,std::vector<texture> &texturelist,int  x, int y){
     int increment = texturelist[1].width/2;
     int totalcount = cards.size();
@@ -78,11 +79,14 @@ int main()
     std::vector<struct card> player;
 
     //Player Choice: 
-    std::string choice;
+    bool stand=false;
     bool running = true;
 
-    ShowCardList(framebuffer,dealer,texturelist,DEALERORIGIN_X,DEALERORIGIN_Y);
-    while(running&&choice!="stand"){
+    //DealerAssignment
+    dealer.push_back(generatelog());
+    dealer.push_back(generatelog());
+
+    while(running){
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
@@ -95,17 +99,31 @@ int main()
 
                     SDL_ConvertEventToRenderCoordinates(renderer,&event);
                     
-                    if(hitButton.mouseinside(texturelist[14],event.button.x,event.button.y)){
+                    if(!stand && hitButton.mouseinside(texturelist[15],event.button.x,event.button.y)){
                         std::cout << "X: " << event.button.x << "Y: " << event.button.y << std::endl;
                         player.push_back(generatelog());
                     }
+
+                    if(standButton.mouseinside(texturelist[14],event.button.x,event.button.y)){
+                        stand = true;
+                    }
                 }
             }
+
+            if(stand){
+                while(handvalue(dealer)<15){
+                    dealer.push_back(generatelog());
+                }
+                stand = false;
+            }
+
+            
+
         }
 
         //Render Area
         ShowCardList(framebuffer,player,texturelist,PLAYERORIGIN_X,PLAYERORIGIN_Y);
-
+        ShowCardList(framebuffer,dealer,texturelist,DEALERORIGIN_X,DEALERORIGIN_Y);
         SDL_UpdateTexture(texture,NULL,framebuffer,WIDTH*sizeof(uint32_t));
 
         //RendererClearing

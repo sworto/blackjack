@@ -14,10 +14,12 @@
 
 #define PLAYERBUTTON_X 62
 #define PLAYERBUTTON_Y -60
+
+
+//Defines the button structure for the event loops
 struct Button{
     int x;
-    int y;
-
+    int y;   
     bool mouseinside(struct texture ButtTex,int mouseX, int mouseY);
 };
 
